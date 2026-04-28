@@ -86,3 +86,20 @@ Backward Root Cause Analysis
 Human Review & Feedback
       ↓
 Evaluation Dataset Generation
+```
+
+---
+
+## Project Structure
+
+```text
+traceroot/
+├── pipeline/     # Multi-step AI pipeline stages (intake, extraction, classification, summarization)
+├── tracing/      # Span-based tracing and OpenTelemetry instrumentation
+├── storage/      # SQLite database and JSON trace files
+├── analysis/     # Root cause analysis and failure categorization
+├── api/          # FastAPI backend
+├── frontend/     # React or Streamlit UI
+├── evals/        # Evaluation datasets and regression tests
+└── docker/       # Dockerfiles and compose configuration
+```
