@@ -44,6 +44,9 @@ frontend/.next/
 *.swp
 *.swo
 
+# Pipeline output
+result.json
+
 # OS
 .DS_Store
 Thumbs.db

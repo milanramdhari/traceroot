@@ -1,0 +1,4 @@
+python-dotenv>=1.0.0
+litellm>=1.55.0
+urllib3>=1.26.5,<2
+pypdf>=5.0.0
