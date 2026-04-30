@@ -9,7 +9,7 @@ Valid types: contract, invoice, report, correspondence
 Return valid JSON with this exact shape:
 {
   "document_type": "<one of the valid types>",
-  "confidence": <float between 0.0 and 1.0 rating your certainty in this classification>,
+  "confidence": <integer 1-5 rating your certainty in this classification>,
   "reasoning": "<one sentence explaining the classification>"
 }
 Return only the JSON object, no explanation."""

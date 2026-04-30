@@ -1,9 +1,10 @@
 import time
-import uuid
-import functools
+import functools    
 from contextvars import ContextVar
 from datetime import datetime, timezone
 from typing import Optional
+from nanoid import generate
+
 
 from tracing.span import Span
 from tracing.trace import Trace
@@ -23,12 +24,12 @@ def get_active_trace() -> Optional[Trace]:
 
 
 def _now() -> str:
-    return datetime.now(timezone.utc).isoformat()
+    return time.time()
 
 
 def start_trace() -> Trace:
     trace = Trace(
-        trace_id=str(uuid.uuid4()),
+        trace_id=generate(size=8),
         started_at=_now(),
     )
     _active_trace.set(trace)
@@ -49,7 +50,6 @@ def finish_trace(trace: Trace, final_output: Optional[dict] = None, error: Optio
             trace.status = "degraded"
         else:
             trace.status = "success"
-
     return trace
 
 
