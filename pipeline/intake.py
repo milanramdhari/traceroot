@@ -3,6 +3,8 @@ from typing import Optional, Tuple
 
 from pypdf import PdfReader
 
+from tracing.tracer import instrument
+
 
 def _read_pdf(path: str) -> str:
     reader = PdfReader(path)
@@ -21,6 +23,7 @@ def _read_file(path: str) -> Tuple[str, Optional[str]]:
         return f.read(), path
 
 
+@instrument("intake")
 def ingest(source: str) -> dict:
     """
     Step 1 — Intake.

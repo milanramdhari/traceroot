@@ -1,4 +1,5 @@
 from llm import complete_json
+from tracing.tracer import instrument
 
 TYPE_INSTRUCTIONS = {
     "contract": "Focus on parties involved, obligations, key terms, dates, and any penalties or conditions.",
@@ -15,11 +16,13 @@ Return valid JSON with this exact shape:
 {{
   "summary": "<concise paragraph summary>",
   "key_points": ["list of 3-5 bullet point highlights"],
-  "document_type": "{document_type}"
+  "document_type": "{document_type}",
+  "confidence": <integer 1-5 rating your certainty in the summary quality>
 }}
 Return only the JSON object, no explanation."""
 
 
+@instrument("summarization")
 def summarize(doc: dict, entities: dict, classification: dict) -> dict:
     """
     Step 4 — Summarization.

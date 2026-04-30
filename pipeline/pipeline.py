@@ -1,10 +1,16 @@
 import json
+import os
 import sys
+
+# Add project root to sys.path so tracing/ and storage/ are importable
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from intake import ingest
 from extraction import extract_entities
 from classification import classify_document
 from summarization import summarize
+from tracing.tracer import start_trace, finish_trace
+from storage.store import save_trace
 
 SAMPLE_DOCUMENT = """
 INVOICE #1042
@@ -30,19 +36,32 @@ Please remit payment to: payments@acmedesign.com
 
 def run_pipeline(source: str) -> dict:
     """
-    Runs all 4 pipeline steps in sequence and returns the combined result.
+    Runs all 4 pipeline steps in sequence, wrapped in a trace.
     """
-    doc = ingest(source)
-    entities = extract_entities(doc)
-    classification = classify_document(doc, entities)
-    summary = summarize(doc, entities, classification)
+    trace = start_trace()
+    error = None
+    result = None
+    try:
+        doc = ingest(source)
+        entities = extract_entities(doc)
+        classification = classify_document(doc, entities)
+        summary = summarize(doc, entities, classification)
 
-    return {
-        "intake": doc,
-        "extraction": entities,
-        "classification": classification,
-        "summarization": summary,
-    }
+        result = {
+            "intake": doc,
+            "extraction": entities,
+            "classification": classification,
+            "summarization": summary,
+        }
+    except Exception as exc:
+        error = str(exc)
+        raise
+    finally:
+        finish_trace(trace, final_output=result, error=error)
+        file_path = save_trace(trace)
+        print(f"[trace] id={trace.trace_id}  status={trace.status}  saved={file_path}")
+
+    return result
 
 
 if __name__ == "__main__":
@@ -50,3 +69,4 @@ if __name__ == "__main__":
     result = run_pipeline(source)
     with open("result.json", "w") as f:
         json.dump(result, f, indent=2)
+    print(json.dumps(result, indent=2))
