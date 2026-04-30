@@ -1,0 +1,19 @@
+SOFTWARE DEVELOPMENT AGREEMENT
+
+This Software Development Agreement is entered into on February 10, 2025 between Orion Labs LLC and Velocity Commerce Inc.
+
+Scope of Work:
+Orion Labs LLC agrees to develop a custom inventory management platform for Velocity Commerce Inc.
+
+Project Timeline:
+Start Date: February 15, 2025
+Completion Date: August 30, 2025
+
+Compensation:
+Velocity Commerce Inc. agrees to pay a total of $85,000 in milestone-based payments.
+
+Confidentiality:
+Both parties agree not to disclose confidential business information shared during the project.
+
+Termination:
+Either party may terminate this agreement with 14 days written notice.

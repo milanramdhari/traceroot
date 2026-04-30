@@ -1,0 +1,19 @@
+INVOICE #7821
+
+Date: January 12, 2025
+Due Date: February 12, 2025
+
+From: PixelForge Creative Agency
+To: Horizon Retail Group
+
+Services Provided:
+- Website Redesign: $4,500.00
+- Branding Consultation: $1,200.00
+- SEO Optimization: $850.00
+
+Subtotal: $6,550.00
+Tax (5%): $327.50
+Total Due: $6,877.50
+
+Payment Terms:
+Net 30. Please send payment to billing@pixelforge.io

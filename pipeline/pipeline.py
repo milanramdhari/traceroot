@@ -48,4 +48,5 @@ def run_pipeline(source: str) -> dict:
 if __name__ == "__main__":
     source = sys.argv[1] if len(sys.argv) > 1 else SAMPLE_DOCUMENT
     result = run_pipeline(source)
-    print(json.dumps(result, indent=2))
+    with open("result.json", "w") as f:
+        json.dump(result, f, indent=2)
