@@ -103,3 +103,25 @@ traceroot/
 ├── evals/        # Evaluation datasets and regression tests
 └── docker/       # Dockerfiles and compose configuration
 ```
+
+---
+
+## Viewing traces (local UI)
+
+After you run the pipeline, traces are written to `storage/index.db` (SQLite index) and `storage/traces/<trace_id>.json` (full span data).
+
+**Web dashboard** (stdlib only; listens on `127.0.0.1`):
+
+```bash
+python3 storage/trace_viewer.py
+```
+
+Open [http://127.0.0.1:8765/](http://127.0.0.1:8765/) for a table of all traces; click a row to open span timelines, latencies, and expandable JSON (including LLM prompts/responses where recorded).
+
+**Terminal table** (same SQLite index):
+
+```bash
+python3 storage/trace_viewer.py --table
+```
+
+Use `--port <n>` if `8765` is already in use.
