@@ -44,6 +44,7 @@ frontend/.next/
 .idea/
 *.swp
 *.swo
+CLAUDE.md
 
 # Pipeline output
 result.json
