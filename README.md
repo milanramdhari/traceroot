@@ -110,13 +110,17 @@ traceroot/
 
 After you run the pipeline, traces are written to `storage/index.db` (SQLite index) and `storage/traces/<trace_id>.json` (full span data).
 
-**Web dashboard** (stdlib only; listens on `127.0.0.1`):
+**Web dashboard** (stdlib only; binds on this machine only — tries IPv6 `::` first so `localhost` in the browser works more reliably):
 
 ```bash
 python3 storage/trace_viewer.py
+# optional: open browser tab automatically
+python3 storage/trace_viewer.py --open
 ```
 
-Open [http://127.0.0.1:8765/](http://127.0.0.1:8765/) for a table of all traces; click a row to open span timelines, latencies, and expandable JSON (including LLM prompts/responses where recorded).
+Open [http://127.0.0.1:8765/](http://127.0.0.1:8765/) for a table of all traces; click a row to open span timelines, latencies, and expandable JSON (including LLM prompts/responses where recorded). If the terminal shows an IPv6 line, [http://[::1]:8765/](http://[::1]:8765/) also works.
+
+**If the browser says “connection failed”:** keep the terminal running (the server stops when you exit). Use **`http://127.0.0.1:8765/`** (not `https://`). If the port is busy, run `python3 storage/trace_viewer.py --port 8875`. You can force the bind address with `--bind 127.0.0.1` or `--bind 0.0.0.0`.
 
 **Terminal table** (same SQLite index):
 
@@ -125,3 +129,29 @@ python3 storage/trace_viewer.py --table
 ```
 
 Use `--port <n>` if `8765` is already in use.
+
+---
+
+## Viewing failure analyses (local UI)
+
+After you run the analyzer, results are saved to `storage/analyses/<trace_id>.json` and indexed in the same SQLite file (`analyses` table).
+
+```bash
+python3 analysis/analyzer.py              # latest trace from index
+python3 analysis/analyzer.py <trace_id>
+```
+
+**Web dashboard** (default port **8766** so it can run next to the trace viewer):
+
+```bash
+python3 storage/analysis_viewer.py
+python3 storage/analysis_viewer.py --open
+```
+
+Open [http://127.0.0.1:8766/](http://127.0.0.1:8766/) for a table of analyses; click through for explanation, step scores, and evidence snippets. Same connection tips as the trace viewer (`http` not `https`, keep the process running, `--port` / `--bind` if needed).
+
+**Terminal table:**
+
+```bash
+python3 storage/analysis_viewer.py --table
+```

@@ -1,0 +1,8 @@
+Team Metrics Overview
+Customer retention improved from 72% to 86% over the last quarter.
+Mobile engagement increased significantly after the redesign launch.
+Support response times dropped by nearly 18%.
+Main concern:
+Cloud hosting expenses increased faster than projected.
+Recommendation:
+Reduce unused infrastructure resources and improve onboarding automation.

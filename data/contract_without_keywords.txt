@@ -1,0 +1,5 @@
+MEMORANDUM OF UNDERSTANDING
+This document confirms that Vertex Dynamics and Solara Systems will collaborate on the development of an internal logistics platform beginning June 2025.
+Vertex Dynamics will oversee infrastructure and backend implementation responsibilities.
+Solara Systems will provide monthly compensation of $12,000 for the duration of the engagement ending December 2025.
+Both organizations agree not to disclose internal technical documentation shared during collaboration.

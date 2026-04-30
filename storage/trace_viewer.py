@@ -19,6 +19,10 @@ import urllib.parse
 from typing import Any, Optional
 
 _ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _ROOT not in sys.path:
+    sys.path.insert(0, _ROOT)
+from storage.serve_local import run_local_http
+
 _DB_PATH = os.path.join(_ROOT, "storage", "index.db")
 _TRACES_DIR = os.path.join(_ROOT, "storage", "traces")
 
@@ -333,19 +337,26 @@ def main() -> None:
     p = argparse.ArgumentParser(description="View pipeline traces")
     p.add_argument("--table", action="store_true", help="Print SQLite index as a text table")
     p.add_argument("--port", type=int, default=8765, help="HTTP port (default 8765)")
+    p.add_argument(
+        "--bind",
+        default=None,
+        metavar="ADDR",
+        help="Force bind address (e.g. 127.0.0.1 or 0.0.0.0). Default: try IPv6 :: then 127.0.0.1",
+    )
+    p.add_argument("--open", action="store_true", help="Open the UI in your default browser")
     args = p.parse_args()
 
     if args.table:
         _print_table()
         return
 
-    addr = ("127.0.0.1", args.port)
-    with http.server.ThreadingHTTPServer(addr, TraceViewerHandler) as httpd:
-        print(f"Trace viewer at http://{addr[0]}:{addr[1]}/  (Ctrl+C to stop)")
-        try:
-            httpd.serve_forever()
-        except KeyboardInterrupt:
-            print("\nStopped.")
+    run_local_http(
+        TraceViewerHandler,
+        args.port,
+        title="Trace viewer",
+        bind=args.bind,
+        open_browser=args.open,
+    )
 
 
 if __name__ == "__main__":

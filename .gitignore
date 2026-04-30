@@ -22,6 +22,7 @@ env/
 *.sqlite
 *.sqlite3
 storage/traces/
+storage/analyses/
 
 # Logs
 *.log

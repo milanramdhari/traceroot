@@ -1,0 +1,7 @@
+From: julia.mendes@novacore.io
+To: operations@novacore.io
+Team,
+After reviewing the warehouse efficiency numbers from March, I noticed shipping delays decreased by 11% while processing throughput increased by 19%.
+Please review the attached observations and let me know whether we should schedule a meeting next week to discuss operational adjustments.
+Regards,
+Julia Mendes
